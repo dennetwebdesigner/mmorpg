@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de mapas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <aside id='left'>
+        <ul class="tools">
+            <li>
+                <fieldset class="half">
+                    largura:
+                    <input type="number" id="setWidth" value='500'>
+                </fieldset>
+                <fieldset class="half">
+                    altura:
+                    <input type="number" id="setHeight" value='500'>
+                </fieldset>
+                <button data-size="setNew">Aplicar</button>
+            </li>
+            <li>
+                <button id="showMatrix">mostrar codigo</button>
+            </li>
+            <li id="map-tile">
+                <div id="getPicture" data-getPicture="listTiles"></div>
+            </li>
+            <li>
+                <button tool id="moveTools" data-tools="move">
+                    <i class="fa fa-arrows"  data-tools="move"></i>
+                </button>
+                <button tool id="brushTools" data-tools="brush">
+                    <i class="fa fa-paint-brush"  data-tools="brush"></i>
+                </button>
+                <button tool id="toogleCollision" data-tools="collision">
+                    <p data-tools="collision">block</p>
+                </button>
+            </li>
+        </ul>
+    </aside>
+    <main id="canvas">
+        <div id="map"></div>
+    </main>
+    <aside id='right'></aside>
+    <div id="setScript">
+        <div class="setScriptTop">
+            <h3>Script do Mapa</h3>
+            <button id="hidenScript">x</button>
+        </div>
+        <div id="matrix"></div>
+        <div id="matrix_collision"></div>
+    </div>
+
+
+
+
+    <script src="./src/index.js" type="module"></script>
+
+</body>
+
+</html>

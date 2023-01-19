@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <!-- <div style="position: absolute;left:10px;top:50px">
+        teclas -
+        <p>w - cima</p>
+        <p>s - baixo</p>
+        <p>d - direita</p>
+        <p>a - esquerda</p>
+    </div> -->
+
+    <main class="container">
+        <div id="UserInterface"></div>
+        <canvas></canvas>
+        <div class="container-logs">
+            <ul id="logs">
+                <li>Todos os Logs do jogo ficaram aqui</li>
+            </ul>
+            <form id="sendMessage">
+                <input type="text" name="messages" autocomplete="off" id="inputSendMessage">
+            </form>
+        </div>
+    </main>
+
+
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script src="./engine/Core/index.js" type="module"></script>
+
+</body>
+
+</html>
