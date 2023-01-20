@@ -10,6 +10,23 @@ gameRouter.use(
 	express.static(resolve(__dirname, '..', '..', '..', 'public', 'mmorpg'))
 );
 
+gameRouter.use(
+	'engine',
+	express.static(
+		resolve(
+			__dirname,
+			'..',
+			'..',
+			'..',
+			'public',
+			'mmorpg',
+			'engine',
+			'core',
+			'index.js'
+		)
+	)
+);
+
 app.set('views', resolve(__dirname, 'public'));
 app.engine('html', ejs.renderFile);
 app.set('views engine', 'html');
