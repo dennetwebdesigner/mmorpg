@@ -1,5 +1,5 @@
 import { mouseClick } from "./mouseClick.js";
-import { mouseMoviment } from "./MouseMoviment.js";
+import { mouseMoviment } from "./mouseMoviment.js";
 import { mouseScroll } from "./mouseScroll.js";
 
 class MouseEvents {
