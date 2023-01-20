@@ -158,7 +158,6 @@ export class LoginScene {
 
     click() {
         const mouse = Game.mouse;
-        console.log(Game.mouse)
         if (
             mouse.x >= 420 &&
             mouse.x <= 757 &&

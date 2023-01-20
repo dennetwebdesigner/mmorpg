@@ -1,7 +1,8 @@
+import UI from '../UI/UIObjectsList.js'
 import { Game } from "./canvasSettings.js";
+
 import { Keyboard } from "./keyboard.js";
 
-import UI from '../UI/UIObjectsList.js'
 
 class Input {
     constructor(connection) {
@@ -76,7 +77,6 @@ class Input {
                 Keyboard.chat.forEach((key) => {
                     if (input == key) {
                         if (Game.frameInput == 'jogo' && !UI.Inputs.sendMessageInput.value) {
-                            console.log('aqui')
                             Game.frameInput = 'external'
                             UI.Inputs.sendMessageInput.focus()
                         } else if (Game.frameInput == 'external' && !UI.Inputs.sendMessageInput.value) {

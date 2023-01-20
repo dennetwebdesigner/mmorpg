@@ -3,11 +3,8 @@ import { Game } from '../canvasSettings.js'
 export const mouseClick = () => {
     window.addEventListener('mousedown', (e) => {
         if (e.target.getAttribute('id') == 'inputSendMessage') {
-            console.log('chat message input')
             Game.frameInput = 'external'
         } else {
-            console.log('chat message input in')
-
             Game.frameInput = 'jogo'
         }
 

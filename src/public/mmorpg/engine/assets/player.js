@@ -7,6 +7,7 @@ export default class Player {
         this.fps = 0;
         this.timeAnimation = 1;
         this.spriteCutPosition = { x: 0, y: 0 };
+        console.log(this)
     }
 
     update() {

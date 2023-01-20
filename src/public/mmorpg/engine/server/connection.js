@@ -1,5 +1,6 @@
-import ConnectionsList from './index.js'
 import { Game_start } from '../Core/GAME.js'
+import ConnectionsList from './index.js'
+
 export const userSettings = { id: null }
 
 export const game_connection = (socket) => {

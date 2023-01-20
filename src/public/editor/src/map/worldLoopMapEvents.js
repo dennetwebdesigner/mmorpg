@@ -27,7 +27,6 @@ const setSizeMap = async() => {
 }
 
 const watchMatrixChange = async() => {
-    console.log(JSON.stringify(matrix) != JSON.stringify(drawmatrix.value))
     if (JSON.stringify(matrix) != JSON.stringify(drawmatrix.value)) {
         matrixScript.innerHTML = JSON.stringify(matrix);
     }

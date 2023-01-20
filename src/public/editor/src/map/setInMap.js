@@ -1,7 +1,8 @@
-import { matrix } from "./settings.js";
 import { map } from "../elementsHtml.js";
-import { mapSettings } from "./settings.js";
 import { matrixVisual } from "./setCellMatrix.js";
+import { matrix } from "./settings.js";
+import { mapSettings } from "./settings.js";
+
 export const setMapMatrix = async() => {
     map.innerHTML = ''
     if (matrix.length <= 0 || mapSettings.size.width != map.clientWidth || mapSettings.size.height != map.clientHeight) {
@@ -17,6 +18,6 @@ export const setMapMatrix = async() => {
 
             }
         }
-        console.log(height, width)
+        // console.log(height, width)
     }
 };
