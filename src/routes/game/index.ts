@@ -7,9 +7,8 @@ const app = express();
 const gameRouter = Router();
 
 gameRouter.use(
-	express.static(resolve(__dirname, '..', '..', 'public', 'mmorpg'))
+	express.static(resolve(__dirname, '..', '..', '..', 'public', 'mmorpg'))
 );
-// app.use(express.static(resolve(__dirname, 'public', 'editor')))
 
 app.set('views', resolve(__dirname, 'public'));
 app.engine('html', ejs.renderFile);
