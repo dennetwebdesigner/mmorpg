@@ -9,7 +9,7 @@ const app = express();
 const editorRouter = Router();
 
 editorRouter.use(
-	express.static(resolve(__dirname, '..', '..', 'public', 'editor'))
+	express.static(resolve(__dirname, '..', '..', '..', 'public', 'editor'))
 );
 
 app.set('views', resolve(__dirname, 'public'));

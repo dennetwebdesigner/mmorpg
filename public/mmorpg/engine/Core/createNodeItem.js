@@ -1,9 +1,10 @@
 import { Game } from './canvasSettings.js'
+import { Sprite } from './Sprite.js'
 
 export const NodeItem = (nodeItemSettings) => {
 
-    let { position, sprite, spriteCutPosition } = nodeItemSettings
-
+    let { position, spriteCutPosition } = nodeItemSettings
+    const sprite = new Sprite(nodeItemSettings.sprite).img
     Game.brushTool.drawImage(
         sprite,
         spriteCutPosition.x * Game.display.box,

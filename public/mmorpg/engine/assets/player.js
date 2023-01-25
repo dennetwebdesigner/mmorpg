@@ -1,5 +1,6 @@
-import { NodeItem, Input } from "./index.js";
-import { draw_tag_name } from "./Player/DisplayTagNames.js";
+import { Attack } from './attack.js';
+import { NodeItem, Input } from './index.js';
+import { draw_tag_name } from './Player/DisplayTagNames.js';
 
 export default class Player {
     constructor(settings) {
@@ -7,7 +8,7 @@ export default class Player {
         this.fps = 0;
         this.timeAnimation = 1;
         this.spriteCutPosition = { x: 0, y: 0 };
-        console.log(this)
+        this.attack = new Attack(this);
     }
 
     update() {
@@ -15,13 +16,15 @@ export default class Player {
         this.time();
         NodeItem(this);
         draw_tag_name(this.id);
+        this.attack.hit_base(this.attributes.attack);
     }
 
     time() {
-        if (this.direction.last == "down") this.spriteCutPosition.y = 0;
-        if (this.direction.last == "left") this.spriteCutPosition.y = 1;
-        if (this.direction.last == "right") this.spriteCutPosition.y = 2;
-        if (this.direction.last == "up") {
+        if (this.direction.last == 'down') this.spriteCutPosition.y = 0;
+
+        if (this.direction.last == 'left') this.spriteCutPosition.y = 1;
+        if (this.direction.last == 'right') this.spriteCutPosition.y = 2;
+        if (this.direction.last == 'up') {
             this.spriteCutPosition.y = 3;
         }
 

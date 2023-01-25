@@ -1,6 +1,5 @@
 import UI from '../UI/UIObjectsList.js'
 import { Game } from "./canvasSettings.js";
-
 import { Keyboard } from "./keyboard.js";
 
 
@@ -16,9 +15,6 @@ class Input {
             if (Game.scene.current != 'login') {
 
                 this.key_pressed("Enter", e.key, 'Enter')
-
-
-
                 this.key_pressed("up", e.key, 'up');
                 this.key_pressed("down", e.key, 'down');
                 this.key_pressed("left", e.key, 'left');

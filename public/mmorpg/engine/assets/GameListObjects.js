@@ -13,9 +13,6 @@ export const clear_nodes_game = () => {
 }
 
 export const generate_player = (data) => {
-    const img = new Image()
-    img.src = data.sprite
-    data.sprite = img
     const player = new Player(data)
     set_nodes_in_game(player)
 }

@@ -103,7 +103,5 @@ export class Phase001Scene {
             ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
             ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"]
         ]
-
-
     }
 }

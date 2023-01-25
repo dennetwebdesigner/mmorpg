@@ -45,7 +45,7 @@ ajax.addEventListener('load', (data) => {
     tilesImg.create_tabs()
 })
 
-ajax.open('get', 'http://localhost:3000/editor/assets/all-tiles')
+ajax.open('get', `${window.location.protocol}//${window.location.host}/editor/assets/all-tiles`)
 ajax.send()
 
 setWidth.addEventListener('change', (e) => {
