@@ -1,7 +1,6 @@
 import { LoginScene } from '../assets/Scenes/LoginScene.js';
 import { Phase001Scene } from '../assets/Scenes/Phase001Scene.js';
 import UI from '../UI/UIObjectsList.js';
-import { setAudio } from './Audio/createAudio.js';
 import { Game } from './canvasSettings.js';
 import { mouseEvents } from './MouseEvents/mouseEvents.js';
 
@@ -56,6 +55,15 @@ export class Game_start {
             Game.display.size.height
         );
 
+        Object.keys(Game.layers).forEach((layer) => {
+            Game.layers[layer].brushTool.clearRect(
+                0,
+                0,
+                Game.display.size.width,
+                Game.display.size.height
+            );
+        });
+
         Game.camera.current(this.connection.id);
         Game.camera.delimiters(this.connection.id);
 
@@ -63,9 +71,26 @@ export class Game_start {
         Game.brushTool.translate(Game.camera.position.x, Game.camera.position.y);
         Game.brushTool.scale(Game.camera.scale, Game.camera.scale);
 
+        Object.keys(Game.layers).forEach((layer) => {
+            Game.layers[layer].brushTool.save();
+            if (layer != 'UI') {
+                Game.layers[layer].brushTool.translate(
+                    Game.camera.position.x,
+                    Game.camera.position.y
+                );
+            }
+            Game.layers[layer].brushTool.scale(Game.camera.scale, Game.camera.scale);
+        });
+
         this.update(this.connection);
 
         Game.brushTool.restore();
+
+        Object.keys(Game.layers).forEach((layer) => {
+            if (layer != 'UI') {
+                Game.layers[layer].brushTool.restore();
+            }
+        });
 
         setTimeout(() => {
             requestAnimationFrame(() => {

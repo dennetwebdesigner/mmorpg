@@ -24,13 +24,15 @@ body {
 .container {
     position: relative;
     width: 1180px;
+    height: 90vh;
+    margin: 0;
 }
 
 canvas {
-    width: 800px;
     margin: 0 auto;
     display: block;
     border: 1px solid black;
+    position: absolute;
 }
 
 #formNamePlayer {

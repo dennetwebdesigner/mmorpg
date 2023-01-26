@@ -35,6 +35,18 @@ export class Attack {
             x: this.me.position.x,
             y: this.me.position.y,
         };
+
+        this.correction_position_area();
+
+        Object.keys(GameListObjectsInGM).forEach((key) => {
+            const players = GameListObjectsInGM[key];
+            this.isInside(players);
+        });
+
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    correction_position_area() {
         if (this.me.direction.last == 'down') {
             this.position.y = this.me.position.y + this.me.size.height * 1.7;
             this.position.x = this.me.position.x;
@@ -51,13 +63,6 @@ export class Attack {
             this.position.x = this.position.x + this.size.width;
             this.position.y = this.me.position.y;
         }
-
-        Object.keys(GameListObjectsInGM).forEach((key) => {
-            const players = GameListObjectsInGM[key];
-            this.isInside(players);
-        });
-
-        return Math.floor(Math.random() * (max - min) + min);
     }
 
     isInside(player) {
