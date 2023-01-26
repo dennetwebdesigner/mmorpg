@@ -115,6 +115,13 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/connect-livereload@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@types/connect-livereload/-/connect-livereload-0.6.0.tgz#7c9ee985adf992f6f3e0943b7bebbc6a7706c52b"
+  integrity sha512-X/yH5WjuUWWAyevPxSyuEjrGAo3tXYte12BD7qWtHs6RPyUKg18seYlwT2/OPMV6/0QxjEkTTvEINcAXTqjjNg==
+  dependencies:
+    "@types/connect" "*"
+
 "@types/connect@*":
   version "3.4.35"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.35.tgz#5fcf6ae445e4021d1fc2219a4873cc73a3bb2ad1"
@@ -516,6 +523,11 @@ concat-stream@^1.4.7:
     inherits "^2.0.3"
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
+
+connect-livereload@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/connect-livereload/-/connect-livereload-0.6.1.tgz#1ac0c8bb9d9cfd5b28b629987a56a9239db9baaa"
+  integrity sha512-3R0kMOdL7CjJpU66fzAkCe6HNtd3AavCS4m+uW4KtJjrdGPT0SQEZieAYd+cm+lJoBznNQ4lqipYWkhBMgk00g==
 
 content-disposition@0.5.4:
   version "0.5.4"

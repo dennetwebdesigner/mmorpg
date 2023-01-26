@@ -1,3 +1,4 @@
+import livereload from 'connect-livereload';
 import ejs from 'ejs';
 import { Router } from 'express';
 import express from 'express';
@@ -9,6 +10,7 @@ const gameRouter = Router();
 gameRouter.use(
 	express.static(resolve(__dirname, '..', '..', '..', 'public', 'mmorpg'))
 );
+gameRouter.use(livereload());
 
 gameRouter.use(
 	'engine',
