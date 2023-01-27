@@ -1,15 +1,15 @@
-import { setAudio } from "../../Core/Audio/createAudio.js";
-import { Game } from "../../Core/canvasSettings.js";
-import { Input } from "../../Core/Inputs.js";
-import { tile_A } from "../../Core/tilesmap/tile_A.js";
-import NodeObjectList from "../GameListObjects.js";
+import { setAudio } from '../../Core/Audio/createAudio.js';
+import { Game } from '../../Core/canvasSettings.js';
+import { Input } from '../../Core/Inputs.js';
+import { tile_A } from '../../Core/tilesmap/tile_A.js';
+import NodeObjectList from '../GameListObjects.js';
 
 export class Phase001Scene {
     constructor(connection) {
-        this.name = "phase001";
+        this.name = 'phase001';
         this.connection = connection;
         this.input = new Input(this.connection);
-        this.ready = false
+        this.ready = false;
 
         this.map = {
             overlay: {
@@ -30,7 +30,7 @@ export class Phase001Scene {
     }
 
     start() {
-        setAudio({ src: './engine/assets/sounds/sound001.mp3' })
+        setAudio({ src: './engine/assets/sounds/sound001.mp3' });
     }
 
     update() {
@@ -38,17 +38,17 @@ export class Phase001Scene {
 
         Object.keys(NodeObjectList).forEach((node_item) => {
             const player = NodeObjectList[node_item];
-            player.update();
+            player.update(this.connection);
         });
 
-        if (this.input.moviment.x != "idle" || this.input.moviment.y != "idle") {
+        if (this.input.moviment.x != 'idle' || this.input.moviment.y != 'idle') {
             const moviment = this.input.moviment;
             NodeObjectList[this.connection.id].walk = true;
 
-            if (moviment.x != "idle")
+            if (moviment.x != 'idle')
                 NodeObjectList[this.connection.id].lastMoviment = moviment.x;
             else NodeObjectList[this.connection.id].lastMoviment = moviment.y;
-            this.connection.emit("_moviment_player", {
+            this.connection.emit('_moviment_player', {
                 id: this.connection.id,
                 moviment,
             });
@@ -65,7 +65,7 @@ export class Phase001Scene {
             matrix[icoll].forEach((tile, irow) => {
                 if (tile) {
                     const cut = tile_A.tile(tile);
-                    this.tileMap("", { x: irow, y: icoll }, cut);
+                    this.tileMap('', { x: irow, y: icoll }, cut);
                 }
             });
         }
@@ -87,21 +87,261 @@ export class Phase001Scene {
 
     coordMap() {
         this.map.overlay.ground = [
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"],
-            ["ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2", "ground.png_11_2"]
-        ]
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+            [
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+                'ground.png_11_2',
+            ],
+        ];
     }
 }

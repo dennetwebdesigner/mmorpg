@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io';
 
+import BaseHit from '../../Players/Skills/BaseHit';
 import { Status } from './Status';
 
 export interface PlayerDTO {

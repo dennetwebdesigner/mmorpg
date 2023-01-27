@@ -1,4 +1,5 @@
 import { Game } from '../Core/canvasSettings.js';
+import { showLog } from '../UI/Methods/LogMessages.js';
 import GameListObjectsInGM from './GameListObjects.js';
 
 /**
@@ -25,7 +26,7 @@ export class Attack {
      * @param {{max: number, min: number}} attack
      * @returns {number}
      */
-    hit_base({ max, min }) {
+    hit_base() {
         this.size = {
             width: this.me.size.width * 1.7,
             height: this.me.size.height * 1.7,
@@ -43,7 +44,21 @@ export class Attack {
             this.isInside(players);
         });
 
-        return Math.floor(Math.random() * (max - min) + min);
+        if (this.target_damage && this.target_damage.id != this.me.id) {
+            const take_damage = Math.floor(
+                Math.random() *
+                (this.me.attributes.attack.max - this.me.attributes.attack.min + 1) +
+                this.me.attributes.attack.min
+            );
+
+            this.target_damage.attributes.life.current -= take_damage;
+            showLog(
+                `você infligiu ${take_damage} de dano em ${this.target_damage.name}`
+            );
+            this.target_damage = null;
+        } else {
+            console.log('nenhum alvo para atacar!');
+        }
     }
 
     correction_position_area() {
@@ -66,12 +81,12 @@ export class Attack {
     }
 
     isInside(player) {
-        Game.brushTool.fillRect(
-            this.position.x,
-            this.position.y,
-            this.size.width,
-            this.size.height
-        );
+        // Game.brushTool.fillRect(
+        //     this.position.x,
+        //     this.position.y,
+        //     this.size.width,
+        //     this.size.height
+        // );
 
         if (player.id != this.me.id) {
             if (
@@ -80,7 +95,7 @@ export class Attack {
                 player.position.y >= this.position.y &&
                 player.position.y <= this.position.y + this.size.height
             )
-                console.log('detect top_left');
+                this.target_damage = player;
             else if (
                 player.position.x + player.size.width >= this.position.x &&
                 player.position.x + player.size.width <=
@@ -88,7 +103,7 @@ export class Attack {
                 player.position.y >= this.position.y &&
                 player.position.y <= this.position.y + this.size.height
             )
-                console.log('detect top_rigjt');
+                this.target_damage = player;
             else if (
                 player.position.x >= this.position.x &&
                 player.position.x <= this.position.x + this.size.width &&
@@ -96,7 +111,7 @@ export class Attack {
                 player.position.y + player.size.height <=
                 this.position.y + this.size.height
             )
-                console.log('detect bottom+_+left');
+                this.target_damage = player;
             else if (
                 player.position.x + player.size.width >= this.position.x &&
                 player.position.x + player.size.width <=
@@ -105,7 +120,8 @@ export class Attack {
                 player.position.y + player.size.height <=
                 this.position.y + this.size.height
             )
-                console.log('detect bottom_right');
+                this.target_damage = player;
+            else this.target_damage = null;
         }
     }
 }

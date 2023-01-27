@@ -35,6 +35,7 @@ class Core {
      */
     constructor(canvas, layerPlayer, layerSky, layerUI) {
         this.canvas = canvas;
+
         this.layers = {
             player: {
                 canvas: layerPlayer,

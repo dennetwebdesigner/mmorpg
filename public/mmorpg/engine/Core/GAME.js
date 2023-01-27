@@ -19,7 +19,7 @@ export class Game_start {
     init() {
         this.start();
         this.loop();
-        mouseEvents.setEvents();
+        mouseEvents.setEvents(this.connection);
     }
 
     update() {
@@ -87,9 +87,7 @@ export class Game_start {
         Game.brushTool.restore();
 
         Object.keys(Game.layers).forEach((layer) => {
-            if (layer != 'UI') {
-                Game.layers[layer].brushTool.restore();
-            }
+            Game.layers[layer].brushTool.restore();
         });
 
         setTimeout(() => {

@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io';
 
+import BaseHit from '../../Players/Skills/BaseHit';
 import { gameSettings } from './../../Game';
 import { PlayerDTO } from './PlayerDTO';
 import { Status } from './Status';
@@ -16,7 +17,13 @@ export default class Player {
 		last: string;
 		walk: boolean;
 	};
+	public skill: {
+		baseHit: BaseHit;
+	};
 	public connection: Socket | null;
+	public cooldown: {
+		base_hit: boolean;
+	};
 
 	constructor({
 		position,
@@ -41,7 +48,6 @@ export default class Player {
 			height: gameSettings.box,
 		};
 
-		this.style = style || { color: this.getRandomColor() };
 		this.attributes = !attributes ? new Status({}) : new Status(attributes);
 
 		this.sprite = sprite
@@ -50,7 +56,12 @@ export default class Player {
 
 		this.direction = direction || { last: 'down', walk: false };
 		this.connection = connection || null;
+
+		this.cooldown = {
+			base_hit: false,
+		};
 	}
+
 	getRandomColor() {
 		const letters = '0123456789ABCDEF';
 		let color = '#';
@@ -58,5 +69,9 @@ export default class Player {
 			color += letters[Math.floor(Math.random() * 16)];
 		}
 		return color;
+	}
+
+	base_hit(id): BaseHit {
+		return new BaseHit(this);
 	}
 }
