@@ -2,6 +2,7 @@ import { Attack } from './attack.js';
 import { NodeItem, Input } from './index.js';
 import { draw_tag_name } from './Player/DisplayTagNames.js';
 import { Game } from '../Core/canvasSettings.js';
+import GameListObjectsInGM from './GameListObjects.js';
 
 export default class Player {
     constructor(settings) {
@@ -23,24 +24,62 @@ export default class Player {
         if (this.attributes.life.current <= 0) {
             this.attributes.life.current = 0;
         }
-        if (connection.id == this.id) this.show_attributes();
+
+        this.show_attributes(connection);
     }
 
-    show_attributes() {
-        // life
-        const width =
-            (this.attributes.life.current * 100) / this.attributes.life.max;
-        this.bar({ color: 'red', size: { width, height: 10 } });
-        this.bar({ color: 'blue', position: { x: 10, y: 25 } });
+    show_attributes(connection) {
+        if (connection.id == this.id) {
+            // life bar
+            const width =
+                (this.attributes.life.current * 100) / this.attributes.life.max;
+            this.box_bar({ color: 'black' });
+            this.bar({ color: 'red', size: { width, height: 10 } });
+            //Habilites bar
+            this.box_bar({ position: { x: 10, y: 25 }, color: 'black' });
+            this.bar({ color: 'blue', position: { x: 10, y: 25 } });
+        } else {
+            Object.keys(GameListObjectsInGM).forEach((key) => {
+                if (key == this.id) {
+                    const player = GameListObjectsInGM[key];
+                    const forCent =
+                        (this.attributes.life.current * 100) / this.attributes.life.max;
+                    const widthPx = (forCent * 32) / 100;
+                    const size = { width: 32, height: 3 };
+                    const position = {
+                        x: player.position.x,
+                        y: player.position.y - 13,
+                    };
+                    this.box_bar({ size, position });
+                    this.bar({
+                        color: 'yellow',
+                        size: {...size, width: widthPx },
+                        position,
+                    });
+                }
+            });
+        }
     }
 
-    box_bar(position) {
+    box_bar(settings = null) {
+        const position =
+            settings && settings.position ? settings.position : { x: 10, y: 10 };
+        const size =
+            settings && settings.size ? settings.size : { width: 100, height: 10 };
+        const color = settings && settings.color ? settings.color : 'black';
+
         Game.layers.UI.brushTool.beginPath();
-        Game.layers.UI.brushTool.rect(position.x, position.y, 100, 10);
-        Game.layers.UI.brushTool.strokeStyle = 'black';
+        Game.layers.UI.brushTool.fillStyle = 'black';
+        Game.layers.UI.brushTool.fillRect(
+            position.x,
+            position.y,
+            size.width,
+            size.height
+        );
+        Game.layers.UI.brushTool.strokeStyle = color;
         Game.layers.UI.brushTool.lineWidth = 2;
         Game.layers.UI.brushTool.stroke();
-        Game.layers.UI.brushTool.fill();
+        Game.layers.UI.brushTool.closePath();
     }
 
     bar(settings = null) {
@@ -48,16 +87,15 @@ export default class Player {
         const size = !settings.size ? { width: 100, height: 10 } : settings.size;
         const color = !settings.color ? 'black' : settings.color;
 
-        this.box_bar(position);
         Game.layers.UI.brushTool.beginPath();
         Game.layers.UI.brushTool.fillStyle = color;
-        Game.layers.UI.brushTool.rect(
+        Game.layers.UI.brushTool.fillRect(
             position.x,
             position.y,
             size.width,
             size.height
         );
-        Game.layers.UI.brushTool.fill();
+        Game.layers.UI.brushTool.closePath();
     }
 
     time() {
