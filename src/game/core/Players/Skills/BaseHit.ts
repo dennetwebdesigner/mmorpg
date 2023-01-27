@@ -85,7 +85,7 @@ export default class BaseHit {
 		sendWorld(connection, 'skill/hit_base', {
 			id: target.id,
 			life: { current: target.attributes.life.current },
-			logMessage: `você recebeu ${take_damage} de dano de ${target.name}`,
+			logMessage: `você recebeu ${take_damage} de dano de ${this.player.name}`,
 		});
 	}
 }
