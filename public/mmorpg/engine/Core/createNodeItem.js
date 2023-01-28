@@ -1,10 +1,9 @@
-import { Game } from './canvasSettings.js'
-import { Sprite } from './Sprite.js'
+import { Game } from './canvasSettings.js';
+import { Sprite } from './Sprite.js';
 
 export const NodeItem = (nodeItemSettings) => {
-
-    let { position, spriteCutPosition } = nodeItemSettings
-    const sprite = new Sprite(nodeItemSettings.sprite).img
+    let { position, spriteCutPosition } = nodeItemSettings;
+    const sprite = new Sprite(nodeItemSettings.sprite).img;
     Game.brushTool.drawImage(
         sprite,
         spriteCutPosition.x * Game.display.box,
@@ -15,11 +14,11 @@ export const NodeItem = (nodeItemSettings) => {
         position.y,
         Game.display.box,
         Game.display.box
-    )
-}
+    );
+};
 
-export const TextNodeItem = ({ size, text, position, style }) => {
-    Game.brushTool.fillStyle = style.color
-    Game.brushTool.font = `${size}px Arial`;
+export const TextNodeItem = ({ font, text, position, style }) => {
+    Game.brushTool.fillStyle = style.color;
+    Game.brushTool.font = font;
     Game.brushTool.fillText(text, position.x, position.y);
-}
+};
