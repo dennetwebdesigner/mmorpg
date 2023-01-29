@@ -1,32 +1,33 @@
-import { Game } from "../../Core/canvasSettings.js";
-import UIObjectsList from "../../UI/UIObjectsList.js";
-import { loginPlayer } from "../../UI/Methods/LoginPlayer.js";
+import { Game } from '../../Core/canvasSettings.js';
+import UIObjectsList from '../../UI/UIObjectsList.js';
+import { loginPlayer } from '../../UI/Methods/LoginPlayer.js';
 
 export class LoginScene {
     constructor(connection) {
-        this.name = "login";
+        this.name = 'login';
         this.connection = connection;
 
         this.background = new Image();
-        this.background.src = "./engine/assets/img/login/UI_Login_fundo.png";
+        this.background.src = './engine/assets/img/login/UI_Login_fundo.png';
 
         this.logo = new Image();
-        this.logo.src = "./engine/assets/img/login/UI_Login_logo.png";
+        this.logo.src = './engine/assets/img/login/UI_Login_logo.png';
 
         this.btnStart = new Image();
-        this.btnStart.src = "./engine/assets/img/login/UI_Login_bt_iniciar.png";
+        this.btnStart.src = './engine/assets/img/login/UI_Login_bt_iniciar.png';
+        this.loading = false;
 
         this.inputs = new Image();
-        this.inputs.src = "./engine/assets/img/login/UI_Login_inputs.png";
+        this.inputs.src = './engine/assets/img/login/UI_Login_inputs.png';
 
-        this.inputUsername = document.createElement("input");
-        this.inputUsername.classList.add("inputsLog");
-        this.inputUsername.setAttribute("id", "usernameInput");
+        this.inputUsername = document.createElement('input');
+        this.inputUsername.classList.add('inputsLog');
+        this.inputUsername.setAttribute('id', 'usernameInput');
 
-        this.inputPassword = document.createElement("input");
-        this.inputPassword.type = "password";
-        this.inputUsername.setAttribute("id", "passwordInput");
-        this.inputPassword.classList.add("inputsLog");
+        this.inputPassword = document.createElement('input');
+        this.inputPassword.type = 'password';
+        this.inputUsername.setAttribute('id', 'passwordInput');
+        this.inputPassword.classList.add('inputsLog');
 
         UIObjectsList.Inputs.NamePlayer = this.inputUsername;
         UIObjectsList.Inputs.passwordPlayer = this.inputPassword;
@@ -35,49 +36,49 @@ export class LoginScene {
     }
 
     getStyle(element, att, callback) {
-        const getAtt = +window.getComputedStyle(element)[att].replace("px", "");
+        const getAtt = +window.getComputedStyle(element)[att].replace('px', '');
         return callback(getAtt);
     }
 
     adjustInputsLog() {
-        this.inputUsername.style.top = this.getStyle(Game.canvas, "top", (data) => {
+        this.inputUsername.style.top = this.getStyle(Game.canvas, 'top', (data) => {
             const top =
                 document.body.clientHeight / 2 -
                 this.inputUsername.clientHeight / 2 -
                 53;
-            return top + "px";
+            return top + 'px';
         });
 
-        this.inputPassword.style.top = this.getStyle(Game.canvas, "top", (data) => {
+        this.inputPassword.style.top = this.getStyle(Game.canvas, 'top', (data) => {
             const top =
                 document.body.clientHeight / 2 -
                 this.inputUsername.clientHeight / 2 +
                 94;
 
-            return top + "px";
+            return top + 'px';
         });
 
         this.inputUsername.style.left = this.getStyle(
             Game.canvas,
-            "left",
+            'left',
             (data) => {
                 let left =
                     document.body.clientWidth / 2 -
                     this.inputUsername.clientWidth / 2 -
                     1.9;
-                return left + "px";
+                return left + 'px';
             }
         );
 
         this.inputPassword.style.left = this.getStyle(
             Game.canvas,
-            "left",
+            'left',
             (data) => {
                 let left =
                     document.body.clientWidth / 2 -
                     this.inputUsername.clientWidth / 2 -
                     1.9;
-                return left + "px";
+                return left + 'px';
             }
         );
     }
@@ -158,27 +159,22 @@ export class LoginScene {
 
     click() {
         const mouse = Game.mouse;
-        if (
-            mouse.x >= 420 &&
-            mouse.x <= 757 &&
-            mouse.y >= 547 &&
-            mouse.y <= 659
-        ) {
-            loginPlayer(this.connection, "register_new_player");
+        if (mouse.x >= 420 && mouse.x <= 757 && mouse.y >= 547 && mouse.y <= 659) {
+            if (this.loading) {
+                return;
+            }
+
+            this.loading = true;
+            loginPlayer(this.connection, 'register_new_player');
         }
     }
 
     mouseOver() {
         const mouse = Game.mouse;
-        if (
-            mouse.x >= 420 &&
-            mouse.x <= 757 &&
-            mouse.y >= 547 &&
-            mouse.y <= 659
-        ) {
-            Game.canvas.style.cursor = "pointer";
+        if (mouse.x >= 420 && mouse.x <= 757 && mouse.y >= 547 && mouse.y <= 659) {
+            Game.canvas.style.cursor = 'pointer';
         } else {
-            Game.canvas.style.cursor = "default";
+            Game.canvas.style.cursor = 'default';
         }
     }
 }

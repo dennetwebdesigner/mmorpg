@@ -1,8 +1,10 @@
+import { sendServer } from '../../utils/connection.js';
+import { Game } from '../Core/canvasSettings.js';
 import { Attack } from './attack.js';
+import GameListObjectsInGM from './GameListObjects.js';
 import { NodeItem, Input } from './index.js';
 import { draw_tag_name } from './Player/DisplayTagNames.js';
-import { Game } from '../Core/canvasSettings.js';
-import GameListObjectsInGM from './GameListObjects.js';
+
 
 export default class Player {
     constructor(settings) {
@@ -125,6 +127,6 @@ export default class Player {
     }
 
     click(connection) {
-        connection.emit('skill/hit_base', { id: this.id });
+        sendServer(connection, 'skill/hit_base', { id: this.id });
     }
 }

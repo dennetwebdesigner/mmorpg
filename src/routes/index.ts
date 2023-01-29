@@ -2,6 +2,7 @@ import { Router } from 'express';
 import express from 'express';
 import { resolve } from 'path';
 
+import { apiRouter } from './api';
 import { editorRouter } from './editor';
 import { gameRouter } from './game';
 
@@ -16,5 +17,6 @@ gameRouter.use(
 
 router.use(gameRouter);
 router.use('/editor', editorRouter);
+router.use('/api', apiRouter);
 
 export { router };

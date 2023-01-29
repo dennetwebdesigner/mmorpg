@@ -1,6 +1,8 @@
 import { Server } from 'http';
 import socketio, { Socket } from 'socket.io';
 
+import { midAuthController } from '../../../../services/Authenticate/middleware';
+import { receiveClient as conClient } from '../../../connection/connectionMethods';
 import { connectServer } from '../../../connection/ConnectServer';
 import { disconnectServer } from '../../../connection/DisconnectServer';
 import { findAllPlayer } from './../../../servers/Auth';
@@ -13,38 +15,9 @@ export const firstClient: {
 	id: '',
 };
 
-export const sendServer = (
-	connection: socketio.Socket,
-	sign: string,
-	data: any
-): void => {
-	connection.emit(sign, data);
-	connection.broadcast.emit(sign, data);
-};
-
-export const sendMe = (
-	connection: socketio.Socket,
-	sign: string,
-	data: any
-): void => {
-	connection.emit(sign, data);
-};
-
-export const sendWorld = async (
-	connection: socketio.Socket,
-	sign: string,
-	data: any
-): Promise<void> => {
-	connection.broadcast.emit(sign, data);
-};
-
-export const receiveClient = async (
-	socket: socketio.Socket,
-	sign: string,
-	callback: any
-) => {
-	socket.on(sign, async (dataClient) => {
-		await callback(dataClient);
+const _conection_server = (connetion: Socket) => {
+	connectServer.forEach((itemConnected) => {
+		itemConnected(connetion);
 	});
 };
 
@@ -63,16 +36,21 @@ export const serverSocket = (server: Server) => {
 		},
 	});
 
-	io.on('connection', (socket) => {
+	io.on('connection', async (socket: Socket) => {
 		if (!firstClient.socket && !firstClient.id) {
 			firstClient.id = socket.id;
 			firstClient.socket = socket;
 		}
 
-		connectServer.forEach((itemConnected) => {
-			itemConnected(socket);
+		// testes by connections and response
+		await conClient(socket, 'test', (data: any) => {
+			console.log(data);
 		});
 
+		// User all connection responsibility
+		_conection_server(socket);
+
+		// User all disconnection responsibility
 		_player__disconnected(socket);
 	});
 	return io;

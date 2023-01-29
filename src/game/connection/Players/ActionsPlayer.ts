@@ -4,7 +4,7 @@ import {
 	receiveClient,
 	sendMe,
 	sendWorld,
-} from '../../core/helper/Server/connection';
+} from '../../connection/connectionMethods';
 import { moviment_player } from '../../core/Players/ActionsPlayer/MovimentPlayer';
 import BaseHit from '../../core/Players/Skills/BaseHit';
 import { findByIdPlayer } from './../../servers/Auth';

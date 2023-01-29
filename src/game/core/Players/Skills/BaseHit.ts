@@ -1,8 +1,10 @@
 import { Socket } from 'socket.io';
 
+
+import { sendMe, sendWorld } from '../../../connection/connectionMethods';
 import Area2D from '../../Area2D';
 import { findAllPlayer, findByIdPlayer } from './../../../servers/Auth';
-import { sendMe, sendWorld } from './../../helper/Server/connection';
+
 
 export default class BaseHit {
 	public player: any;

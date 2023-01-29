@@ -1,8 +1,10 @@
+import { sendServer } from '../../../utils/connection.js';
 import { setAudio } from '../../Core/Audio/createAudio.js';
 import { Game } from '../../Core/canvasSettings.js';
 import { Input } from '../../Core/Inputs.js';
 import { tile_A } from '../../Core/tilesmap/tile_A.js';
 import NodeObjectList from '../GameListObjects.js';
+
 
 export class Phase001Scene {
     constructor(connection) {
@@ -48,7 +50,7 @@ export class Phase001Scene {
             if (moviment.x != 'idle')
                 NodeObjectList[this.connection.id].lastMoviment = moviment.x;
             else NodeObjectList[this.connection.id].lastMoviment = moviment.y;
-            this.connection.emit('_moviment_player', {
+            sendServer(this.connection, '_moviment_player', {
                 id: this.connection.id,
                 moviment,
             });

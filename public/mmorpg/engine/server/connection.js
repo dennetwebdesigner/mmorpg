@@ -1,25 +1,28 @@
-import { Game_start } from '../Core/GAME.js'
-import ConnectionsList from './index.js'
+import { sendServer, receiveServer } from '../../utils/connection.js';
+import { Game_start } from '../Core/GAME.js';
+import ConnectionsList from './index.js';
 
-export const userSettings = { id: null }
+export const userSettings = { id: null };
 
 export const game_connection = (socket) => {
-    socket.on('getUserIDServer', (data) => {
-        userSettings.id = data.id
-    })
+    receiveServer(socket, 'getUserIDServer', (data) => {
+        userSettings.id = data.id;
+    });
 
-    const game = new Game_start(socket)
-    game.init()
+    // socket.on('getUserIDServer', (data) => {
+    //     userSettings.id = data.id;
+    // });
 
-    socket.on('test', (data) => {
-        console.log(data.world)
-    })
+    const game = new Game_start(socket);
+    game.init();
 
-    ConnectionsList.forEach(itemsConnection => {
-        itemsConnection(socket)
-    })
-}
+    // sendServer(socket, 'test', { test: 'resultado da conexão' });
 
-export const requestServer = (connection, sign, data) => {
-    connection.emit(sign, data)
-}
+    // socket.on('test', (data) => {
+    //     console.log(data.world);
+    // });
+
+    ConnectionsList.forEach((itemsConnection) => {
+        itemsConnection(socket);
+    });
+};

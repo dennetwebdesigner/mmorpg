@@ -10,6 +10,7 @@ const server = http.createServer(app);
 
 // allow access from clients
 app.use(cors());
+app.use(express.json());
 
 // Desativa o X-Powered-By: Express
 app.disable('x-powered-by');
