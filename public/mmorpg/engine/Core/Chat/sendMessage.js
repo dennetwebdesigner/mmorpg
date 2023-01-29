@@ -9,7 +9,7 @@ export const sendMessage = async(connection) => {
         const message = e.target.elements.messages.value;
 
         if (message) {
-            sendServer('chatMessage', { message, id: connection.id });
+            sendServer(connection, 'chatMessage', { message, id: connection.id });
             e.target.elements.messages.value = '';
         }
     });
