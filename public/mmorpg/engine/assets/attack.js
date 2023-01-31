@@ -1,5 +1,9 @@
-import { Game } from '../Core/canvasSettings.js';
-import { showLog } from '../UI/Methods/LogMessages.js';
+import {
+    Game
+} from '../Core/canvasSettings.js';
+import {
+    showLog
+} from '../UI/Methods/LogMessages.js';
 import GameListObjectsInGM from './GameListObjects.js';
 
 /**
@@ -14,19 +18,84 @@ export class Attack {
      * @type {any}
      */
     me;
+    /**
+     * @param {number} time
+     */
 
     /**
      * @param {any} me
      */
-    constructor(me) {
+    constructor() {
+        this.sprite = new Image();
+        this.sprite.src = './engine/assets/img/animations/hit_1.png';
+        this.time = 0;
+        this.fps = 0;
+        this.active = false;
+        this.size = {
+            width: 0,
+            height: 0,
+        };
+
+        this.position = {
+            x: 0,
+            y: 0,
+        };
+    }
+
+    animation(me) {
         this.me = me;
+
+        if (!this.active) {
+            return;
+        }
+        this.fps++;
+
+        this.cutSprite = {
+            x: 0,
+            y: 0,
+        };
+        this.time;
+        if (this.fps >= 60 / 17) {
+            this.time++;
+            this.fps = 0;
+        }
+
+        if (this.time > 4) {
+            this.time = 0;
+            this.active = false;
+        }
+
+        this.cutSprite.x = this.time * 32;
+
+        // this.position = {
+        //     x: position.x,
+        //     y: position.y,
+        // };
+
+        // this.size = {
+        //     width: size.width * Game.camera.scale,
+        //     height: size.height * Game.camera.scale,
+        // };
+
+        Game.brushTool.drawImage(
+            this.sprite,
+            this.cutSprite.x,
+            this.cutSprite.y,
+            32,
+            32,
+            this.position.x,
+            this.position.y,
+            32,
+            32
+        );
     }
 
     /**
      * @param {{max: number, min: number}} attack
      * @returns {number}
      */
-    hit_base() {
+    hit_base(me) {
+        this.me = me;
         this.size = {
             width: this.me.size.width * Game.camera.scale,
             height: this.me.size.height * Game.camera.scale,
@@ -61,7 +130,8 @@ export class Attack {
         }
     }
 
-    correction_position_area() {
+    correction_position_area(me) {
+        this.me = me;
         if (this.me.direction.last == 'down') {
             this.position.y =
                 this.me.position.y + this.me.size.height * Game.camera.scale;

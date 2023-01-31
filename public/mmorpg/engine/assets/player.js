@@ -17,6 +17,11 @@ import {
 } from './Player/DisplayTagNames.js';
 
 export default class Player {
+    /**
+     *
+     * @type {Attack}
+     */
+    attack;
     constructor(settings) {
         Object.assign(this, settings);
         this.type = 'player';
@@ -26,12 +31,13 @@ export default class Player {
             x: 0,
             y: 0,
         };
-        this.attack = new Attack(this);
+        this.attack = new Attack();
     }
 
     update(connection) {
         this.fps++;
         this.time();
+        this.attack.animation(this);
         NodeItem(this);
         draw_tag_name(this.id);
 
@@ -152,7 +158,6 @@ export default class Player {
 
     time() {
         if (this.direction.last == 'down') this.spriteCutPosition.y = 0;
-
         if (this.direction.last == 'left') this.spriteCutPosition.y = 1;
         if (this.direction.last == 'right') this.spriteCutPosition.y = 2;
         if (this.direction.last == 'up') {

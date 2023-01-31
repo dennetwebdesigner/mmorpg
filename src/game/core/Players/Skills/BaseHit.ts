@@ -1,11 +1,9 @@
 import { Socket } from 'socket.io';
 
-
 import { sendMe, sendWorld } from '../../../connection/connectionMethods';
 import Area2D from '../../Area2D';
 import { gameSettings } from '../../Game';
 import { findAllPlayer, findByIdPlayer } from './../../../servers/Auth';
-
 
 export default class BaseHit {
 	public player: any;
@@ -85,11 +83,13 @@ export default class BaseHit {
 		sendMe(connection, 'skill/hit_base', {
 			id: target.id,
 			life: { current: target.attributes.life.current },
+			positionSkill: this.position,
 			logMessage: `você infligiu ${take_damage} de dano ao ${target.name}`,
 		});
 		sendWorld(connection, 'skill/hit_base', {
 			id: target.id,
 			life: { current: target.attributes.life.current },
+			positionSkill: this.position,
 			logMessage: `você recebeu ${take_damage} de dano de ${this.player.name}`,
 		});
 	}
