@@ -22,13 +22,15 @@ export const draw_tag_name = (id) => {
     let actualHeight =
         metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
     let w = metrics.width;
-    if (w > player.size.width * 1.7) {
-        const center = player.position.x - (player.size.width * 1.7) / 2;
+    if (w > player.size.width * Game.camera.scale) {
+        const center =
+            player.position.x - (player.size.width * Game.camera.scale) / 2;
         text.position.x = center;
     }
-    if (w < player.size.width * 1.7) {
+    if (w < player.size.width * Game.camera.scale) {
         const txtMid = text.position.x + w / 2;
-        const playerMid = player.position.x + (player.size.width * 1.7) / 2;
+        const playerMid =
+            player.position.x + (player.size.width * Game.camera.scale) / 2;
         const calculateDifference = playerMid - txtMid;
         text.position.x = text.position.x + calculateDifference;
     }

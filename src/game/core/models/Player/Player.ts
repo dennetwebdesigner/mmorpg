@@ -39,8 +39,8 @@ export default class Player {
 		this.name = name;
 		this.id = id || (this.getRandomColor() as string);
 		this.position = position || {
-			x: 0,
-			y: 0,
+			x: (5 * 32) / 1.7,
+			y: (5 * 32) / 1.7,
 		};
 
 		this.size = size || {

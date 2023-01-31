@@ -3,6 +3,7 @@ import { Socket } from 'socket.io';
 
 import { sendMe, sendWorld } from '../../../connection/connectionMethods';
 import Area2D from '../../Area2D';
+import { gameSettings } from '../../Game';
 import { findAllPlayer, findByIdPlayer } from './../../../servers/Auth';
 
 
@@ -15,8 +16,8 @@ export default class BaseHit {
 		this.player = player;
 		this.active = false;
 		this.size = {
-			width: this.player.size.width * 1.7,
-			height: this.player.size.height * 1.7,
+			width: this.player.size.width * gameSettings.scale,
+			height: this.player.size.height * gameSettings.scale,
 		};
 
 		this.position = {
@@ -27,11 +28,13 @@ export default class BaseHit {
 
 	correction_position_area(player) {
 		if (player.direction.last == 'down') {
-			this.position.y = player.position.y + player.size.height * 1.7;
+			this.position.y =
+				player.position.y + player.size.height * gameSettings.scale;
 			this.position.x = player.position.x;
 		}
 		if (player.direction.last == 'up') {
-			this.position.y = player.position.y - player.size.height * 1.7;
+			this.position.y =
+				player.position.y - player.size.height * gameSettings.scale;
 			this.position.x = player.position.x;
 		}
 		if (player.direction.last == 'left') {

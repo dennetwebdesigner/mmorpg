@@ -3,7 +3,9 @@ import { Router } from 'express';
 import express from 'express';
 import { resolve } from 'path';
 
+
 import { allTiles } from '../../services/Tile/tiles';
+
 
 const app = express();
 const editorRouter = Router();
@@ -22,7 +24,7 @@ editorRouter.get('/', async (req, res) => {
 
 editorRouter.get('/assets/all-tiles', async (req, res) => {
 	const tiles = await allTiles();
-	res.json(tiles);
+	return res.json(tiles);
 });
 
 export { editorRouter };

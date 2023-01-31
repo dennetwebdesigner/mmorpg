@@ -1,5 +1,8 @@
-import GameListObjectsInGM from "../assets/GameListObjects.js";
-import { Game } from "./canvasSettings.js";
+import GameListObjectsInGM from '../assets/GameListObjects.js';
+import {
+    Game
+} from './canvasSettings.js';
+
 export class Camera {
     constructor() {
         this.position = {
@@ -12,7 +15,7 @@ export class Camera {
     current(id) {
         this.player = GameListObjectsInGM[id];
         if (this.player) {
-            if (Game.scene.current != "login") {
+            if (Game.scene.current != 'login') {
                 this.position.x = -this.player.position.x * this.scale + Game.display.size.width / 2;
                 this.position.y = -this.player.position.y * this.scale + Game.display.size.height / 2;
             }
@@ -36,7 +39,6 @@ export class Camera {
                         Game.display.size.width) *
                     -1;
             }
-
             if (
                 this.player.position.y - Game.display.size.height / 2 / this.scale <
                 0
@@ -53,7 +55,6 @@ export class Camera {
                         Game.display.size.height) *
                     -1;
             }
-
         }
     }
 }

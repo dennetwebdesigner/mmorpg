@@ -1,10 +1,20 @@
-import { sendServer } from '../../utils/connection.js';
-import { Game } from '../Core/canvasSettings.js';
-import { Attack } from './attack.js';
+import {
+    sendServer
+} from '../../utils/connection.js';
+import {
+    Game
+} from '../Core/canvasSettings.js';
+import {
+    Attack
+} from './attack.js';
 import GameListObjectsInGM from './GameListObjects.js';
-import { NodeItem, Input } from './index.js';
-import { draw_tag_name } from './Player/DisplayTagNames.js';
-
+import {
+    NodeItem,
+    Input
+} from './index.js';
+import {
+    draw_tag_name
+} from './Player/DisplayTagNames.js';
 
 export default class Player {
     constructor(settings) {
@@ -12,9 +22,11 @@ export default class Player {
         this.type = 'player';
         this.fps = 0;
         this.timeAnimation = 1;
-        this.spriteCutPosition = { x: 0, y: 0 };
+        this.spriteCutPosition = {
+            x: 0,
+            y: 0,
+        };
         this.attack = new Attack(this);
-        console.log(this.attributes);
     }
 
     update(connection) {
@@ -35,19 +47,30 @@ export default class Player {
             // life bar
             const width =
                 (this.attributes.life.current * 100) / this.attributes.life.max;
-            this.box_bar(Game.layers.UI.brushTool, { color: 'black' });
+            this.box_bar(Game.layers.UI.brushTool, {
+                color: 'black',
+            });
             this.bar(Game.layers.UI.brushTool, {
                 color: 'red',
-                size: { width, height: 10 },
+                size: {
+                    width,
+                    height: 10,
+                },
             });
             //Habilites bar
             this.box_bar(Game.layers.UI.brushTool, {
-                position: { x: 10, y: 25 },
+                position: {
+                    x: 10,
+                    y: 25,
+                },
                 color: 'black',
             });
             this.bar(Game.layers.UI.brushTool, {
                 color: 'blue',
-                position: { x: 10, y: 25 },
+                position: {
+                    x: 10,
+                    y: 25,
+                },
             });
         } else {
             Object.keys(GameListObjectsInGM).forEach((key) => {
@@ -56,15 +79,23 @@ export default class Player {
                     const forCent =
                         (this.attributes.life.current * 100) / this.attributes.life.max;
                     const widthPx = (forCent * 32) / 100;
-                    const size = { width: 32, height: 3 };
+                    const size = {
+                        width: 32,
+                        height: 3,
+                    };
                     const position = {
                         x: player.position.x,
                         y: player.position.y - 13,
                     };
-                    this.box_bar(Game.layers.sky.brushTool, { size, position });
+                    this.box_bar(Game.layers.sky.brushTool, {
+                        size,
+                        position,
+                    });
                     this.bar(Game.layers.sky.brushTool, {
                         color: 'yellow',
-                        size: {...size, width: widthPx },
+                        size: {...size,
+                            width: widthPx
+                        },
                         position,
                     });
                 }
@@ -74,9 +105,19 @@ export default class Player {
 
     box_bar(brushTool, settings = null) {
         const position =
-            settings && settings.position ? settings.position : { x: 10, y: 10 };
+            settings && settings.position ?
+            settings.position :
+            {
+                x: 10,
+                y: 10,
+            };
         const size =
-            settings && settings.size ? settings.size : { width: 100, height: 10 };
+            settings && settings.size ?
+            settings.size :
+            {
+                width: 100,
+                height: 10,
+            };
         const color = settings && settings.color ? settings.color : 'black';
 
         brushTool.beginPath();
@@ -89,8 +130,18 @@ export default class Player {
     }
 
     bar(brushTool, settings = null) {
-        const position = !settings.position ? { x: 10, y: 10 } : settings.position;
-        const size = !settings.size ? { width: 100, height: 10 } : settings.size;
+        const position = !settings.position ?
+            {
+                x: 10,
+                y: 10,
+            } :
+            settings.position;
+        const size = !settings.size ?
+            {
+                width: 100,
+                height: 10,
+            } :
+            settings.size;
         const color = !settings.color ? 'black' : settings.color;
 
         brushTool.beginPath();
@@ -127,6 +178,8 @@ export default class Player {
     }
 
     click(connection) {
-        sendServer(connection, 'skill/hit_base', { id: this.id });
+        sendServer(connection, 'skill/hit_base', {
+            id: this.id,
+        });
     }
 }

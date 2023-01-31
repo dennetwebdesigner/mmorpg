@@ -28,8 +28,8 @@ export class Attack {
      */
     hit_base() {
         this.size = {
-            width: this.me.size.width * 1.7,
-            height: this.me.size.height * 1.7,
+            width: this.me.size.width * Game.camera.scale,
+            height: this.me.size.height * Game.camera.scale,
         };
 
         this.position = {
@@ -63,11 +63,13 @@ export class Attack {
 
     correction_position_area() {
         if (this.me.direction.last == 'down') {
-            this.position.y = this.me.position.y + this.me.size.height * 1.7;
+            this.position.y =
+                this.me.position.y + this.me.size.height * Game.camera.scale;
             this.position.x = this.me.position.x;
         }
         if (this.me.direction.last == 'up') {
-            this.position.y = this.me.position.y - this.me.size.height * 1.7;
+            this.position.y =
+                this.me.position.y - this.me.size.height * Game.camera.scale;
             this.position.x = this.me.position.x;
         }
         if (this.me.direction.last == 'left') {
