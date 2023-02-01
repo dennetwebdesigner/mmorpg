@@ -99,13 +99,13 @@ export default class BaseHit {
 			sendMe(connection, 'player/life/over', {
 				id: target.id,
 				position: { x: (5 * 32) / 1.7, y: (5 * 32) / 1.7 },
-				logMessage: `você matou  ${this.player.name}`,
+				logMessage: `você foi morto por  ${target.name}`,
 				recovery: target.attributes.life.current,
 			});
 			sendWorld(connection, 'player/life/over', {
 				id: target.id,
 				position: { x: (5 * 32) / 1.7, y: (5 * 32) / 1.7 },
-				logMessage: `você foi morto por  ${target.name}`,
+				logMessage: `você matou  ${this.player.name}`,
 				recovery: target.attributes.life.current,
 			});
 		}
