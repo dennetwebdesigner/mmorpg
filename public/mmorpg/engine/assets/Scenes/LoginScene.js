@@ -1,6 +1,10 @@
-import { Game } from '../../Core/canvasSettings.js';
+import {
+    Game
+} from '../../Core/canvasSettings.js';
 import UIObjectsList from '../../UI/UIObjectsList.js';
-import { loginPlayer } from '../../UI/Methods/LoginPlayer.js';
+import {
+    loginPlayer
+} from '../../UI/Methods/LoginPlayer.js';
 
 export class LoginScene {
     constructor(connection) {
@@ -23,11 +27,12 @@ export class LoginScene {
         this.inputUsername = document.createElement('input');
         this.inputUsername.classList.add('inputsLog');
         this.inputUsername.setAttribute('id', 'usernameInput');
-
+        this.inputUsername.placeholder = 'digite nome de usuario (qualquer um)';
         this.inputPassword = document.createElement('input');
         this.inputPassword.type = 'password';
         this.inputUsername.setAttribute('id', 'passwordInput');
         this.inputPassword.classList.add('inputsLog');
+        this.inputPassword.placeholder = 'digite senha (qualquer um)';
 
         UIObjectsList.Inputs.NamePlayer = this.inputUsername;
         UIObjectsList.Inputs.passwordPlayer = this.inputPassword;
@@ -177,4 +182,4 @@ export class LoginScene {
             Game.canvas.style.cursor = 'default';
         }
     }
-}
+}}
