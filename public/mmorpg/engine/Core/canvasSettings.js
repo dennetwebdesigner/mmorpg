@@ -1,4 +1,6 @@
-import { Camera } from './camera.js';
+import {
+    Camera
+} from './camera.js';
 
 /**
  * @class
@@ -18,11 +20,14 @@ class Core {
      * @property {object} layers.player
      * @property {HTMLCanvasElement} layers.player.canvas
      * @property {CanvasRenderingContext2D} layers.player.brushTool
+		 * @property {object} layers.skill
+     * @property {HTMLCanvasElement} layers.skill.canvas
+     * @property {CanvasRenderingContext2D} layers.skill.brushTool
      * @property {object} layers.sky
-		 * * @property {HTMLCanvasElement} layers.sky.canvas
+		 * @property {HTMLCanvasElement} layers.sky.canvas
      * @property {CanvasRenderingContext2D} layers.sky.brushTool
      * @property {object} layers.UI
-		 * * @property {HTMLCanvasElement} layers.UI.canvas
+		 * @property {HTMLCanvasElement} layers.UI.canvas
      * @property {CanvasRenderingContext2D} layers.UI.brushTool
     
      */
@@ -33,12 +38,16 @@ class Core {
      * @param {HTMLCanvasElement} layerSky
      * @param {HTMLCanvasElement} layerUI
      */
-    constructor(canvas, layerPlayer, layerSky, layerUI) {
+    constructor(canvas, layerPlayer, layerSkill, layerSky, layerUI) {
         this.canvas = canvas;
 
         this.layers = {
             player: {
                 canvas: layerPlayer,
+                brushTool: null,
+            },
+            skill: {
+                canvas: layerSkill,
                 brushTool: null,
             },
             sky: {
@@ -75,6 +84,7 @@ class Core {
         this.layers.player.brushTool = this.layers.player.canvas.getContext('2d');
         this.layers.sky.brushTool = this.layers.sky.canvas.getContext('2d');
         this.layers.UI.brushTool = this.layers.UI.canvas.getContext('2d');
+        this.layers.skill.brushTool = this.layers.skill.canvas.getContext('2d');
 
         this.mouse = {
             x: 0,
@@ -110,7 +120,9 @@ class Core {
 export const Game = new Core(
     document.querySelector('canvas'),
     document.querySelector('#layer_player'),
+    document.querySelector('#layer_skill'),
     document.querySelector('#layer_sky'),
     document.querySelector('#layer_UI')
 );
+Game.setDefault();
 Game.setDefault();

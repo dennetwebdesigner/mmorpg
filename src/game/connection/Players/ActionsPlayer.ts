@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io';
 
+
 import {
 	receiveClient,
 	sendMe,
@@ -8,6 +9,7 @@ import {
 import { moviment_player } from '../../core/Players/ActionsPlayer/MovimentPlayer';
 import BaseHit from '../../core/Players/Skills/BaseHit';
 import { findByIdPlayer } from './../../servers/Auth';
+
 
 export const register_key_pressed = async (connection: Socket) => {
 	receiveClient(connection, '_walk_stop', async (data: any) => {
@@ -43,7 +45,9 @@ export const register_key_pressed = async (connection: Socket) => {
 
 	receiveClient(connection, 'skill/hit_base', async ({ id }) => {
 		const player = await findByIdPlayer(id);
-		if (id == connection.id) player.base_hit(id).start(connection, id);
+		if (id == connection.id) {
+			player.base_hit(id).start(connection, id);
+		}
 	});
 };
 93;

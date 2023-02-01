@@ -1,14 +1,19 @@
-import { setAudio } from '../../Core/Audio/createAudio.js';
+import {
+    setAudio
+} from '../../Core/Audio/createAudio.js';
 import UI from '../UIObjectsList.js';
 
-
-export const showLog = (text) => {
+export const showLog = (text, settings = null) => {
     const li = document.createElement('li');
     li.innerHTML = text;
     const liHeight = li.clientHeight;
     UI.Objects.log.append(li);
     UI.Objects.log.scrollTop += UI.Objects.log.scrollHeight;
-    setAudio({ remove: true });
+    if (!settings || settings.sound) {
+        setAudio({
+            remove: true,
+        });
+    }
 };
 
 export const clearLog = () => {
@@ -27,4 +32,5 @@ export const enabledShowLog = () => {
     UI.Inputs.sendMessage.style.display = 'block';
 };
 
+disabledShowLog();
 disabledShowLog();

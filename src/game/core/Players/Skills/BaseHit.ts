@@ -80,6 +80,7 @@ export default class BaseHit {
 		);
 
 		target.attributes.life.current -= take_damage;
+
 		sendMe(connection, 'skill/hit_base', {
 			id: target.id,
 			life: { current: target.attributes.life.current },
@@ -92,5 +93,21 @@ export default class BaseHit {
 			positionSkill: this.position,
 			logMessage: `você recebeu ${take_damage} de dano de ${this.player.name}`,
 		});
+
+		if (target.attributes.life.current <= 0) {
+			target.attributes.life.current = target.attributes.life.max;
+			sendMe(connection, 'player/life/over', {
+				id: target.id,
+				position: { x: (5 * 32) / 1.7, y: (5 * 32) / 1.7 },
+				logMessage: `você matou  ${this.player.name}`,
+				recovery: target.attributes.life.current,
+			});
+			sendWorld(connection, 'player/life/over', {
+				id: target.id,
+				position: { x: (5 * 32) / 1.7, y: (5 * 32) / 1.7 },
+				logMessage: `você foi morto por  ${target.name}`,
+				recovery: target.attributes.life.current,
+			});
+		}
 	}
 }

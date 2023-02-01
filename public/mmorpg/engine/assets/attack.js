@@ -77,7 +77,7 @@ export class Attack {
         //     height: size.height * Game.camera.scale,
         // };
 
-        Game.brushTool.drawImage(
+        Game.layers.skill.brushTool.drawImage(
             this.sprite,
             this.cutSprite.x,
             this.cutSprite.y,
